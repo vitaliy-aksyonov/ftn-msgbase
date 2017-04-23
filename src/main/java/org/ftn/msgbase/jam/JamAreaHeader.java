@@ -2,7 +2,6 @@ package org.ftn.msgbase.jam;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
 import java.time.LocalDateTime;
 
@@ -24,7 +23,7 @@ final class JamAreaHeader {
 	private final long baseMessageNumber;
 
 	JamAreaHeader(ReadableByteChannel byteChannel) throws FtnException, IOException {
-		ByteBuffer buffer = IOUtils.allocateBuffer(HEADER_SIZE, ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = IOUtils.allocateBuffer(HEADER_SIZE, Constants.JAM_BYTE_ORDER);
 		IOUtils.fillBuffer(buffer, byteChannel);
 		JamUtils.validateSignature(buffer);
 		creationDate = JamUtils.readDateTime(buffer);

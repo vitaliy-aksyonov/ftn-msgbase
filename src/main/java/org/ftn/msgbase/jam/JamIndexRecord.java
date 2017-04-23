@@ -2,7 +2,6 @@ package org.ftn.msgbase.jam;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.ByteChannel;
 
 import org.ftn.msgbase.exceptions.FtnException;
@@ -17,7 +16,7 @@ final class JamIndexRecord {
 	private final long headerOffset;
 
 	public JamIndexRecord(ByteChannel channel) throws IOException, FtnException {
-		ByteBuffer buffer = IOUtils.allocateBuffer(RECORD_SIZE, ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = IOUtils.allocateBuffer(RECORD_SIZE, Constants.JAM_BYTE_ORDER);
 		IOUtils.fillBuffer(buffer, channel);
 		recepientCrc = JamUtils.readUnsignedLong(buffer);
 		headerOffset = JamUtils.readUnsignedLong(buffer);

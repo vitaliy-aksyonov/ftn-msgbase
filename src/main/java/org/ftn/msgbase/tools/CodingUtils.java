@@ -2,7 +2,6 @@ package org.ftn.msgbase.tools;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.CharBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.CharacterCodingException;
@@ -29,7 +28,7 @@ public final class CodingUtils {
 
 	public static String readText(ReadableByteChannel channel, long textSize, Charset charset)
 			throws IOException, FtnException {
-		ByteBuffer buffer = IOUtils.allocateBuffer(BUFFER_SIZE, ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
 		CharBuffer cb = CharBuffer.allocate(BUFFER_SIZE);
 		CharsetDecoder decoder = charset.newDecoder();
 		decoder.onUnmappableCharacter(CodingErrorAction.REPLACE);

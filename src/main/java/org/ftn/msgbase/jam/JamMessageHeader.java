@@ -166,7 +166,7 @@ final class JamMessageHeader {
 
 	private void readHeader(ByteChannel byteChannel, long baseNum) throws FtnException, IOException {
 		log.trace("Retrieving message header.");
-		ByteBuffer buffer = IOUtils.allocateBuffer(MESSAGE_HEADER_SIZE, ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer buffer = IOUtils.allocateBuffer(MESSAGE_HEADER_SIZE, Constants.JAM_BYTE_ORDER);
 		IOUtils.fillBuffer(buffer, byteChannel);
 		JamUtils.validateSignature(buffer);
 		int revision = JamUtils.readUnsignedInt(buffer);
